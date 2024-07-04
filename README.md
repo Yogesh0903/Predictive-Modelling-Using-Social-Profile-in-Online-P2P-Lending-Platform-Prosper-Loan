@@ -67,7 +67,7 @@ House ownership or income range are also significant for borrower segmentation, 
 
 # Descriptive Statistics
 
-Generated descriptive statistics of the dataset to understand the central tendency, dispersion and distribution of the data. Created the correlation matrix using seaborn heatmap to visually identify relationships and patterns in the dataset.
+We generated descriptive statistics of the dataset to understand the central tendency, dispersion and distribution of the data. We also Created the correlation matrix using seaborn heatmap to visually identify relationships and patterns in the dataset.
 
 # Features Creation
 
@@ -140,7 +140,7 @@ This modification helps in accurately reflecting the current status of the loan,
 
 # Data Encoding
 
-Applied label encoding on categorical variables namely 'ProsperRating', 'ListingCategory', 'BorrowerState', 'Occupation', 'EmploymentStatus', 'IncomeRange', 'LoanOriginationQuarter', 'MemberKey', 'CreditRating', 'CreditRisk' to convert them to numerical features. This process maps each unique category to a unique integer.
+We applied label encoding on categorical variables namely 'ProsperRating', 'ListingCategory', 'BorrowerState', 'Occupation', 'EmploymentStatus', 'IncomeRange', 'LoanOriginationQuarter', 'MemberKey', 'CreditRating', 'CreditRisk' to convert them to numerical features. This process maps each unique category to a unique integer.
 
 # Feature Selection 
 
@@ -200,6 +200,8 @@ These features were identified as the most significant in predicting the target 
 - **Recall**: What proportion of actual positives is correctly classified?
 - **F1 Score**: Harmonic mean of Precision and Recall.
 
+### Binary Classification Problem
+
 ### Logistic Regression
 - Logistic Regression helps find how probabilities are changed with actions.
 - The function is defined as P(y) = 1 / (1 + e^-(A+Bx)).
@@ -243,7 +245,12 @@ Based on the evaluation metrics, we selected the Gradient Boosting Tree (GBT) mo
 
 Given these advantages, the GBT model is the most suitable choice for our binary classification task.
 
+### Multiclass Classification Problem
+
+Target varible were categorized into 5 categories as follows : 'Very Low','Low', 'Medium', 'High', 'Very High'
+
 ### AdaBoost Classifier
+
 We used the AdaBoost classifier to predict each of the multiclass targets. The steps involved are:
 
 1. **Model Training**: AdaBoost models were trained on the prepared features.
@@ -276,7 +283,7 @@ We also employed Gradient Boosting Classifier for the multiclass targets, follow
   - Targets (y_test): (5194, 4)
 
 ### Final Model Selection
-Based on the evaluation, we selected the Gradient Boosting Classifier for multiclass targets due to its superior performance metrics and robustness in handling complex data relationships.
+Based on the evaluation, we selected the Gradient Boosting Regressor for multiclass targets due to its superior performance metrics and robustness in handling complex data relationships.   
 
 ### Multiclass Regression Model
 For each multiclass target, we used a Gradient Boosting Regressor to predict the target values. The steps involved are:
@@ -417,3 +424,6 @@ You can access our app by following this link [P2P_Lending_Flask_App](http://p2p
 - `application.py`: Contains the Python code of a Flask web app.
 - `combined_pipeline_EMI.pkl`, `combined_pipeline_ELA.pkl`, and `combined_pipeline_PROI.pkl`: Contain our trained models for different targets.
 - `static` and `templates`: Folders containing static files and HTML templates for the web app.
+
+## Conclusion
+- The study provided valuable insights into the predictive power of various borrower, loan, and social-related features in an online P2P lending market. Our predictive models showcased the importance of credit risk, loan amount, interest rate, and borrower income in determining the likelihood of loan default. By understanding these determinants, stakeholders can make more informed decisions, ultimately improving the efficiency and effectiveness of P2P lending platforms.
