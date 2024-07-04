@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <title>Loan Calculator</title>
+    <style>
+        .form-control::placeholder {
+            font-size: 0.9rem;
+        }
+        .small-font-select {
+            font-size: 0.9rem;
+        }
+        .small-font-select option {
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body style="background-color: #1DA1F2">
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-xl-10">
+                    <div class="card" style="border-radius: 1rem">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-none d-md-block">
+                                <img src="{{ url_for('static', filename='bank-loan-for-property-4521448-3783685.png') }}" alt="loan concept"
+                                    class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 70%;margin-top: 100px ;margin-left: 20px;object-fit:contain;position: relative;" />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body p-4 p-lg-5 text-black">
+                                    <form id="userForm" action="/predict" method="post">
+                                        <h2 class="mb-4">Loan Calculator</h2>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="emiInput" class="form-label">Loan Amount <span class="text-danger">*</span></label>
+                                                <input type="number" id="emiInput" name="emiInput" placeholder="Enter Loan Amount"
+                                                    class="form-control" required min="1" max="1000000">
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="elaInput" class="form-label">Loan Tenure (months) <span class="text-danger">*</span></label>
+                                                <input type="number" id="elaInput" name="elaInput" placeholder="Enter Loan Tenure"
+                                                    class="form-control" required min="1" max="360">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="InterestRateInput" class="form-label">Interest Rate <span class="text-danger">*</span></label>
+                                                <input type="number" id="InterestRateInput" name="InterestRateInput" placeholder="Enter Interest Rate"
+                                                    class="form-control" required min="0" max="100" step="0.01">
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="statemonthlyIncomeInput" class="form-label">Monthly Income <span class="text-danger">*</span></label>
+                                                <input type="number" id="statemonthlyIncomeInput" name="statemonthlyIncomeInput" 
+                                                    placeholder="Enter Monthly Income" class="form-control" required min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="monthlyloanpaymentInput" class="form-label">Monthly Loan Payment <span class="text-danger">*</span></label>
+                                                <input type="number" id="monthlyloanpaymentInput" name="monthlyloanpaymentInput" 
+                                                    placeholder="Enter Monthly Loan Payment" class="form-control" required min="0">
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="ProsperRatingInput" class="form-label">Prosper Rating <span class="text-danger">*</span></label>
+                                                <select class="form-control small-font-select" id="ProsperRatingInput" name="ProsperRatingInput" required>
+                                                    <option value="" disabled selected>Select Prosper Rating</option>
+                                                    <option value="0">0 - N/A</option>
+                                                    <option value="1">1 - HR</option>
+                                                    <option value="2">2 - E</option>
+                                                    <option value="3">3 - D</option>
+                                                    <option value="4">4 - C</option>
+                                                    <option value="5">5 - B</option>
+                                                    <option value="6">6 - A</option>
+                                                    <option value="7">7 - AA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="ProsperScoreInput" class="form-label">Prosper Score <span class="text-danger">*</span></label>
+                                                <select class="form-control small-font-select" id="ProsperScoreInput" name="ProsperScoreInput" required>
+                                                    <option value="" disabled selected>Select Prosper Score</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="DebtToIncomeRatioInput" class="form-label">Debt To Income Ratio <span class="text-danger">*</span></label>
+                                                <input type="number" id="DebtToIncomeRatioInput" name="DebtToIncomeRatioInput" 
+                                                    placeholder="Enter Debt To Income Ratio" class="form-control" required min="0" max="10.01" step="0.01">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="incomeVerification" class="form-label">Income Verification <span class="text-danger">*</span></label>
+                                                <select class="form-control small-font-select" id="incomeVerification" name="incomeVerification" required>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="LoanCurrentDaysDelinquentInput" class="form-label">Loan Current Days Delinquent <span class="text-danger">*</span></label>
+                                                <input type="number" id="LoanCurrentDaysDelinquentInput" name="LoanCurrentDaysDelinquentInput" 
+                                                    placeholder="Enter Loan Current Days Delinquent" class="form-control" required min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="IncomeRangeInput" class="form-label">Income Range <span class="text-danger">*</span></label>
+                                                <select class="form-control small-font-select" id="IncomeRangeInput" name="IncomeRangeInput" required>
+                                                    <option value="" disabled selected>Select Income Range</option>
+                                                    <option value="Not employed">Not employed</option>
+                                                    <option value="$0">$0</option>
+                                                    <option value="$1-24,999">$1-24,999</option>
+                                                    <option value="$25,000-49,999">$25,000-49,999</option>
+                                                    <option value="$50,000-74,999">$50,000-74,999</option>
+                                                    <option value="$75,000-99,999">$75,000-99,999</option>
+                                                    <option value="$100,000+">$100,000+</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label for="LP_CustomerPrincipalPaymentsInput" class="form-label">LP Customer Principal Payments <span class="text-danger">*</span></label>
+                                                <input type="number" id="LP_CustomerPrincipalPaymentsInput" name="LP_CustomerPrincipalPaymentsInput" 
+                                                    placeholder="Enter LP Customer Principal Payments" class="form-control" required min="0" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label for="EmploymentStatusInput" class="form-label">Employment Status <span class="text-danger">*</span></label>
+                                                <select class="form-control small-font-select" id="EmploymentStatusInput" name="EmploymentStatusInput" required>
+                                                    <option value="" disabled selected>Select Employment Status</option>
+                                                    <option value="Full-time">Full-time</option>
+                                                    <option value="Employed">Employed</option>
+                                                    <option value="Part-time">Part-time</option>
+                                                    <option value="Self-employed">Self-employed</option>
+                                                    <option value="Retired">Retired</option>
+                                                    <option value="Other">Other</option>
+                                                    <option value="Not employed">Not employed</option>
+                                                    <option value="Not available">Not available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit" id="submitBtn" class="btn btn-lg btn-block mt-4" style="background-color: #AAB8C2;">Predict</button>
+                                    </form>
+                                    <div id="loadingIndicator" class="d-none text-center mt-3">
+                                        <div class="spinner-border text-warning" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    {% if prediction or user_data %}
+                                    <div class="mt-5">
+                                        <h3>Results</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {% if user_data %}
+                                                <div class="card">
+                                                    <div class="card-header bg-secondary text-white">
+                                                        User Input
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group list-group-flush">
+                                                            {% for key, value in user_data.items() %}
+                                                            <li class="list-group-item"><strong>{{ key }}:</strong> {{ value }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% if prediction %}
+                                                <div class="card">
+                                                    <div class="card-header bg-info text-white">
+                                                        Prediction Results
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group list-group-flush">
+                                                            {% for target, value in prediction.items() %}
+                                                            <li class="list-group-item"><strong>{{ target }}:</strong> {{ value }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa9CIlI6LwQKf5Dg2LvF2w/u"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-smHYkdnlC9S/Z1fItK3GVsa9FfMZ9v8w4xF2j3HgRvrWx1zD8qXgC8aA5pIPb07M"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function (e) {
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('loadingIndicator').classList.remove('d-none');
+        });
+    </script>
+</body>
+</html>
