@@ -403,7 +403,7 @@ The outline the process and results of building predictive models for both binar
 The summary the process of building and evaluating predictive models for binary classification (`Loan Status`) and multiclass regression (`EMI`, `ELA`, `PROI`). The models are trained, evaluated, and saved for deployment, aiming to predict loan default status and other financial metrics accurately. The results demonstrate the effectiveness of the models in predicting these outcomes based on selected features and model configurations.
 
 # Deployment
-You can access our app by following this link [P2P_Lending_Flask_App](http://p2plending-env-1.eba-jqiepxih.ap-south-1.elasticbeanstalk.com/).
+You can access our app by following this link [P2P_Lending_Flask_App](http://p2plendingteama.ap-south-1.elasticbeanstalk.com/).
 
 ## Flask
 - Flask is a tool that lets you create applications for your machine learning model using simple Python code.
